@@ -1,4 +1,4 @@
-MSVC_GENERATOR="Visual Studio 16 2019"
+MSVC_GENERATOR="Visual Studio 17 2022"
 GCC_CLANG_GENERATOR="Unix Makefiles"
 
 clean:
@@ -10,16 +10,16 @@ build:
 	cd build && cmake -S .. -B . -G $(MSVC_GENERATOR) && cmake --build .
 
 build-c:
-	cd build && cmake -S .. -B .cmake -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build .
+	cd build && cmake -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build .
 
 update:
 	cd build && cmake .
 
 run:
-	./build/Debug/Executable.exe
+	./build/app/Debug/Executable.exe
 
 run-c:
-	./build/Executable.exe
+	./build/app/Executable.exe
 
 release:
 	cd build && cmake -S .. -B . -G $(MSVC_GENERATOR) && cmake --build . --config Release
