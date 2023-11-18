@@ -1,4 +1,4 @@
-# C++ 20 Project Template
+# CMake Project Template
 
 ## Setup on Windows
 
