@@ -1,6 +1,12 @@
 MSVC_GENERATOR="Visual Studio 17 2022"
 GCC_CLANG_GENERATOR="Unix Makefiles"
 
+restore:
+	git submodule add --force https://github.com/nlohmann/json external/json
+	git submodule add --force https://github.com/fmtlib/fmt external/fmt
+	git submodule add --force https://github.com/gabime/spdlog external/spdlog
+	git submodule add --force https://github.com/jarro2783/cxxopts external/cxxopts
+
 clean:
 	rm -rf build
 	mkdir build
