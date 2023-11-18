@@ -1,6 +1,9 @@
 MSVC_GENERATOR="Visual Studio 17 2022"
 GCC_CLANG_GENERATOR="Unix Makefiles"
 
+dependency:
+	cd build && cmake -S .. -B . -G $(GCC_CLANG_GENERATOR) --graphviz=graph.dot && dot -Tpng graph.dot -o graphImage.png
+
 restore:
 	git submodule add --force https://github.com/nlohmann/json external/json
 	git submodule add --force https://github.com/fmtlib/fmt external/fmt
@@ -25,7 +28,7 @@ run:
 	./build/app/Debug/Executable.exe
 
 run-c:
-	./build/app/Executable.exe
+	./build/app/Executable
 
 release:
 	cd build && cmake -S .. -B . -G $(MSVC_GENERATOR) && cmake --build . --config Release
