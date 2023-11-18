@@ -9,8 +9,8 @@ set(CMAKE_CXX_EXTENSIONS        OFF)
 option(ENABLE_WARNINGS "Enable to add warnings to a target." ON)
 option(ENABLE_WARNINGS_AS_ERRORS "Enable to treat warnings as errors." OFF)
 
-option(ENABLE_SANITIZE_ADDR "Enable address sanitizer" ON)
-option(ENABLE_SANITIZE_UNDEF "Enable undefined sanitizer" ON)
+option(ENABLE_SANITIZE_ADDR "Enable address sanitizer" OFF)
+option(ENABLE_SANITIZE_UNDEF "Enable undefined sanitizer" OFF)
 
 set(LIBRARY_NAME Library)
 set(EXECUTABLE_NAME Executable)

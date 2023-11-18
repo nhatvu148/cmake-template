@@ -15,26 +15,35 @@ clean:
 	mkdir build
 
 .PHONY: build
-build:
+build-win:
 	cd build && cmake -S .. -B . -G $(MSVC_GENERATOR) && cmake --build .
 
-build-c:
-	cd build && cmake -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build .
+build-gcc:
+	cd build && cmake -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build .
+
+build-clang:
+	cd build && cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build .
 
 update:
 	cd build && cmake .
 
-run:
+run-win:
 	./build/app/Debug/Executable.exe
 
-run-c:
+run-gcc:
 	./build/app/Executable
 
-release:
+run-clang:
+	./build/app/Executable
+
+release-win:
 	cd build && cmake -S .. -B . -G $(MSVC_GENERATOR) && cmake --build . --config Release
 
-release-c:
-	cd build && cmake -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build . --config Release
+release-gcc:
+	cd build && cmake -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build . --config Release
 
-run-r:
+release-clang:
+	cd build && cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build . --config Release
+
+run-release-win:
 	./build/Release/Executable.exe
