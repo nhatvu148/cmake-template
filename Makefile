@@ -1,5 +1,6 @@
 MSVC_GENERATOR="Visual Studio 17 2022"
 GCC_CLANG_GENERATOR="Unix Makefiles"
+BINARY_NAME=Executable
 
 dependency:
 	cd build && cmake -S .. -B . -G $(GCC_CLANG_GENERATOR) --graphviz=graph.dot && dot -Tpng graph.dot -o graphImage.png
@@ -28,13 +29,13 @@ update:
 	cd build && cmake .
 
 run-win:
-	./build/app/Debug/Executable.exe
+	./build/app/Debug/$(BINARY_NAME).exe
 
 run-gcc:
-	./build/app/Executable
+	./build/app/$(BINARY_NAME)
 
 run-clang:
-	./build/app/Executable
+	./build/app/$(BINARY_NAME)
 
 release-win:
 	cd build && cmake -S .. -B . -G $(MSVC_GENERATOR) && cmake --build . --config Release
@@ -46,4 +47,4 @@ release-clang:
 	cd build && cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build . --config Release
 
 run-release-win:
-	./build/Release/Executable.exe
+	./build/Release/$(BINARY_NAME).exe
