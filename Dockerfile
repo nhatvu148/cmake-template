@@ -8,19 +8,30 @@ RUN apt-get update && \
     make build-essential libssl-dev zlib1g-dev \
     libbz2-dev libreadline-dev libsqlite3-dev wget curl git llvm \
     libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev \
-    libffi-dev liblzma-dev && \
-    apt-get install -y gcc-10 g++-10 gdb clang-12 python3.10 python3-pip && \
+    libffi-dev liblzma-dev \
+    software-properties-common && \
+    add-apt-repository -y ppa:ubuntu-toolchain-r/test
+
+RUN wget https://apt.llvm.org/llvm.sh \
+    && chmod u+x llvm.sh \
+    && /llvm.sh 17
+
+RUN apt-get install -y gcc-13 g++-13 gdb python3.10 python3-pip && \
     apt-get install -y python3.10-distutils && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    ln -s /usr/bin/g++-13 /usr/local/bin/g++ && \
+    ln -s /usr/bin/gcc-13 /usr/local/bin/gcc && \
+    ln -s /usr/bin/clang-17 /usr/local/bin/clang && \
+    ln -s /usr/bin/clang++-17 /usr/local/bin/clang++
 
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1-Linux-x86_64.sh \
-      -q -O /tmp/cmake-install.sh \
-      && chmod u+x /tmp/cmake-install.sh \
-      && mkdir /opt/cmake-3.28.1 \
-      && /tmp/cmake-install.sh --skip-license --prefix=/opt/cmake-3.28.1 \
-      && rm /tmp/cmake-install.sh \
-      && ln -s /opt/cmake-3.28.1/bin/* /usr/local/bin
+    -q -O /tmp/cmake-install.sh \
+    && chmod u+x /tmp/cmake-install.sh \
+    && mkdir /opt/cmake-3.28.1 \
+    && /tmp/cmake-install.sh --skip-license --prefix=/opt/cmake-3.28.1 \
+    && rm /tmp/cmake-install.sh \
+    && ln -s /opt/cmake-3.28.1/bin/* /usr/local/bin
 
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
