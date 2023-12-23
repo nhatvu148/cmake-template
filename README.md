@@ -23,3 +23,9 @@
 - Copy 'export PATH="/usr/local/opt/llvm/bin:$PATH"' to ~/.bash_profile
 - g++-13 --version
 - clang++ --version
+
+## Package managers
+
+- [conan](https://conan.io/center)
+- [vckpg](https://vcpkg.io/en/packages)
+- [cargo](https://crates.io)
