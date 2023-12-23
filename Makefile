@@ -69,5 +69,9 @@ conan_r:
 	cd build && conan install .. -s build_type=Release -s compiler.cppstd=23 --output-folder=. --build missing
 
 install-vcpkg:
-	apt-get install -y curl zip unzip tar
+	# apt-get install -y curl zip unzip tar
 	cd external/vcpkg/ && sh ./bootstrap-vcpkg.sh -disableMetrics
+
+conan-config:
+	# apt-get install -y vim
+	vim $$(conan profile path default)
