@@ -7,8 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS        OFF)
 
 option(USE_CPM "Whether to use CPM" OFF)
-option(USE_CONAN "Whether to use Conan" ON)
-option(USE_VCPKG "Whether to use VCPKG" OFF)
+option(USE_CONAN "Whether to use Conan" OFF)
+option(USE_VCPKG "Whether to use VCPKG" ON)
 
 option(ENABLE_WARNINGS "Enable to add warnings to a target." ON)
 option(ENABLE_WARNINGS_AS_ERRORS "Enable to treat warnings as errors." OFF)
