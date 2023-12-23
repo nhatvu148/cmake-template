@@ -53,4 +53,7 @@ run-release-win:
 	./build/Release/$(BINARY_NAME).exe
 
 run:
-	docker-compose up
+	docker compose up
+
+exec:
+	docker compose exec -it cmake-runner bash
