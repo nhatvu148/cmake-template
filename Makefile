@@ -8,8 +8,11 @@ all: build-gcc run-gcc
 dependency:
 	cd build && cmake -S .. -B . -G $(GCC_CLANG_GENERATOR) --graphviz=graph.dot && dot -Tpng graph.dot -o graphImage.png
 
-restore:
+init:
 	git submodule add --force https://github.com/microsoft/vcpkg external/vcpkg
+
+restore:
+	cd external/vcpkg && git submodule update --init --recursive
 
 clean:
 	rm -rf build
@@ -23,7 +26,7 @@ build-gcc:
 	cd build && cmake -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE=Debug -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build .
 
 build-clang:
-	cd build && cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=Release -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build .
+	cd build && cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=Debug -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build .
 
 update:
 	cd build && cmake .
@@ -66,5 +69,5 @@ conan_r:
 	cd build && conan install .. -s build_type=Release -s compiler.cppstd=23 --output-folder=. --build missing
 
 install-vcpkg:
-	apt-get install curl zip unzip tar
+	apt-get install -y curl zip unzip tar
 	cd external/vcpkg/ && sh ./bootstrap-vcpkg.sh -disableMetrics
