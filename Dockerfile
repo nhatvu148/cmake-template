@@ -36,4 +36,9 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 
+WORKDIR /app
+COPY requirements.txt /app
+RUN pip install -r /app/requirements.txt && \
+    conan profile detect
+
 CMD ["/usr/bin/entrypoint.sh"]
