@@ -9,10 +9,7 @@ dependency:
 	cd build && cmake -S .. -B . -G $(GCC_CLANG_GENERATOR) --graphviz=graph.dot && dot -Tpng graph.dot -o graphImage.png
 
 restore:
-	git submodule add --force https://github.com/nlohmann/json external/json
-	git submodule add --force https://github.com/fmtlib/fmt external/fmt
-	git submodule add --force https://github.com/gabime/spdlog external/spdlog
-	git submodule add --force https://github.com/jarro2783/cxxopts external/cxxopts
+	git submodule add --force https://github.com/microsoft/vcpkg external/vcpkg
 
 clean:
 	rm -rf build
@@ -67,3 +64,7 @@ conan_r:
 	rm -rf build
 	mkdir build
 	cd build && conan install .. -s build_type=Release -s compiler.cppstd=23 --output-folder=. --build missing
+
+install-vcpkg:
+	apt-get install curl zip unzip tar
+	cd external/vcpkg/ && sh ./bootstrap-vcpkg.sh -disableMetrics
