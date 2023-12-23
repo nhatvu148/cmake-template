@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  cmake-runner:
+    container_name: cmake-runner
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file:
+      - .env
+    ports:
+      - "${HTTP_SERVER_PORT}:${HTTP_SERVER_PORT}"
+    volumes:
+      - .:/app
+    working_dir: /app 

@@ -33,3 +33,5 @@ external
 *.exe
 *.out
 *.app
+
+.env
