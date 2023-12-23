@@ -12,16 +12,16 @@ RUN apt-get update && \
     software-properties-common && \
     add-apt-repository -y ppa:ubuntu-toolchain-r/test
 
-RUN wget https://apt.llvm.org/llvm.sh \
-    && chmod u+x llvm.sh \
-    && /llvm.sh 17
-
 RUN apt-get install -y gcc-13 g++-13 gdb python3.10 python3-pip && \
     apt-get install -y python3.10-distutils && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/bin/g++-13 /usr/local/bin/g++ && \
-    ln -s /usr/bin/gcc-13 /usr/local/bin/gcc && \
+    ln -s /usr/bin/gcc-13 /usr/local/bin/gcc
+
+RUN wget https://apt.llvm.org/llvm.sh \
+    && chmod u+x llvm.sh \
+    && /llvm.sh 17 && \
     ln -s /usr/bin/clang-17 /usr/local/bin/clang && \
     ln -s /usr/bin/clang++-17 /usr/local/bin/clang++
 
