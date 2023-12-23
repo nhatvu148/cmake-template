@@ -28,4 +28,5 @@
 
 - [conan](https://conan.io/center)
 - [vckpg](https://vcpkg.io/en/packages)
+- [vckpg-link](https://vcpkg.link)
 - [cargo](https://crates.io)
