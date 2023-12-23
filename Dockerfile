@@ -14,6 +14,14 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1-Linux-x86_64.sh \
+      -q -O /tmp/cmake-install.sh \
+      && chmod u+x /tmp/cmake-install.sh \
+      && mkdir /opt/cmake-3.28.1 \
+      && /tmp/cmake-install.sh --skip-license --prefix=/opt/cmake-3.28.1 \
+      && rm /tmp/cmake-install.sh \
+      && ln -s /opt/cmake-3.28.1/bin/* /usr/local/bin
+
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 

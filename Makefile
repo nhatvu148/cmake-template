@@ -2,6 +2,9 @@ MSVC_GENERATOR="Visual Studio 17 2022"
 GCC_CLANG_GENERATOR="Unix Makefiles"
 BINARY_NAME=Executable
 
+.PHONY: all
+all: build-gcc run-gcc
+
 dependency:
 	cd build && cmake -S .. -B . -G $(GCC_CLANG_GENERATOR) --graphviz=graph.dot && dot -Tpng graph.dot -o graphImage.png
 
@@ -48,3 +51,6 @@ release-clang:
 
 run-release-win:
 	./build/Release/$(BINARY_NAME).exe
+
+run:
+	docker-compose up
