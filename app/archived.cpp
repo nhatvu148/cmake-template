@@ -204,5 +204,49 @@ int main(int argc, char **argv)
     //     p_crazy = new int {};
     // }
 
+    // references behave like constant pointers, but don't require dereferencing to read and write
+    double double_value{1.0};
+    double *const const_p_double_value{&double_value};
+
+    double &ref_double_value{double_value};
+
+    std::cout << "-----------------"
+              << "\n";
+
+    int scores[]{1, 2, 3, 2, 3, 4, 5, 6};
+    for (auto &score : scores)
+    {
+        score = score * 10;
+    }
+
+    std::cout << "Scores: ";
+    for (auto score : scores)
+    {
+        std::cout << " " << score;
+    }
+    std::cout << std::endl;
+
+    std::cout << "-----------------"
+              << "\n";
+    std::string planet{"Earth. Where the sky is blue"}; // Initialize with string literal
+    // Changing std::string at runtime
+    planet = "Earth. Where the sky is blue Earth. Where the sky is blue Earth.";
+    std::cout << "planet : " << planet << std::endl;
+
+    // Use a raw array, will be wasted if reassigned a new value
+    const char *planet1{"Earth. Where the sky is blue Earth."};
+    planet1 = "Earth. Where the sky is blue Earth. Where the sky is blue Earth.";
+    std::cout << "planet1 : " << planet1 << std::endl;
+
+    std::string str{"Hello World"};
+    char *data = str.data();
+    std::cout << "Wrapped C string: " << data << std::endl;
+    data[0] = 'B'; // This also changes std::string
+
+    std::cout << "Wrapped C string (after modification): " << data << std::endl;
+    std::cout << "Original string (after modification): " << str << std::endl;
+    // https://cplusplus.com/reference/string/string/c_str/
+    // https://stackoverflow.com/questions/4764897/converting-a-c-style-string-to-a-c-stdstring
+
     return 0;
 }
