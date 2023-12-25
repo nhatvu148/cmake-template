@@ -195,5 +195,14 @@ int main(int argc, char **argv)
     // p_number2 = &number;
     // p_number2 = new int{222};
 
+    std::cout << "-----------------"
+              << "\n";
+
+    // crazy memory leak
+    // int * p_crazy{};
+    // while (true) {
+    //     p_crazy = new int {};
+    // }
+
     return 0;
 }
