@@ -2,6 +2,20 @@
 #include <ctime>
 #include "my_lib.h"
 
+// Marking a function as constexpr gives it the potential
+// to be evaluated at compile time
+constexpr int get_value(int multiplier)
+{
+    return 3 * multiplier;
+}
+
+// Evaluate this function at compile time. If you can't
+// do that throw a compiler error
+consteval int get_value1(int multiplier)
+{
+    return 3 * multiplier;
+}
+
 constinit int some_var = 12345;
 
 int main(int argc, char **argv)
@@ -254,6 +268,39 @@ int main(int argc, char **argv)
     std::cout << "sv: " << sv << std::endl;
     std::cout << "sv1: " << sv1 << std::endl;
     std::cout << "sv2: " << sv2 << std::endl;
+
+    std::cout << "-----------------"
+              << "\n";
+
+    say_age(100);
+
+    double my_scores[]{10.5, 34.3, 4.8, 6.5};
+    double result = sum(my_scores, std::size(my_scores));
+    std::cout << "result : " << result << std::endl;
+    // std::string some_name{"John"};
+    // say_my_name("John");
+    say_my_name(std::string_view("Anthony"));
+
+    std::cout << "-----------------"
+              << "\n";
+    /*
+        For the evaluation to take place at compile time, we have
+        to remember to store the return value in a constexpr result variable
+    */
+    constexpr int result1 = get_value(4); // Compile time
+    std::cout << "result : " << result1 << std::endl;
+
+    /*
+    int some_var{5}; // Run time variable
+    int result2 = get_value(some_var); // Run time
+    std::cout << "result : " << result2 << std::endl;
+    */
+
+    int result2 = get_value1(4);
+
+    // the value of some_var is not known at compile time
+    // int some_var{5};
+    // result2 = get_value1(some_var);
 
     return 0;
 }
