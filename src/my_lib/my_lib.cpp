@@ -12,3 +12,8 @@ void print_hello_world()
               << NLOHMANN_JSON_VERSION_MINOR << "."
               << NLOHMANN_JSON_VERSION_PATCH << "\n";
 }
+
+int add_numbers(int a, int b)
+{
+    return a + b;
+}

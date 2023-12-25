@@ -1,5 +1,5 @@
 set(EXE_SOURCES
-    "main.cc")
+    "main.cpp")
 set(EXE_INCLUDES
     "./")
 
