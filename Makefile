@@ -50,7 +50,7 @@ release-clang:
 	cd build && cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -S .. -B . -G $(GCC_CLANG_GENERATOR) && cmake --build . --config Release
 
 run-release-win:
-	./build/Release/$(BINARY_NAME).exe
+	./build/app/Release/$(BINARY_NAME).exe
 
 run:
 	docker compose up

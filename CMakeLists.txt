@@ -39,6 +39,7 @@ elseif(USE_CONAN)
     find_package(fmt REQUIRED)
     find_package(spdlog REQUIRED)
     find_package(cxxopts REQUIRED)
+    find_package(boost REQUIRED)
 elseif(USE_VCPKG)
     # use this option when there are pre-built binaries, needs to be Cmake projects
     message(STATUS "Using VCPKG")
