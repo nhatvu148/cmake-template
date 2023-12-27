@@ -370,5 +370,13 @@ int main(int argc, char **argv)
     std::cout << "Maximum4: " << *maximum(&xx, &yy) << "\n";
     std::cout << "Maximum5: " << maximum<double>(12, 123.345) << "\n";
 
+    auto func = []<typename T, typename P>(T a, P b)
+    {
+        return a + b;
+    };
+
+    std::cout
+        << "func: " << func(2, 3.9) << std::endl;
+
     return 0;
 }
