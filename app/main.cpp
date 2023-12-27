@@ -4,8 +4,14 @@
 #include <boost/range/numeric.hpp>
 #include <array>
 #include <iterator>
+#include <algorithm>
+#include <vector>
+#include <ranges>
+#include <map>
 
 #include "my_lib.h"
+
+namespace ranges = std::ranges;
 
 // Marking a function as constexpr gives it the potential
 // to be evaluated at compile time
@@ -377,6 +383,134 @@ int main(int argc, char **argv)
 
     std::cout
         << "func: " << func(2, 3.9) << std::endl;
+
+    std::cout << "-----------------"
+              << "\n";
+    std::vector<int> v{10, 2, 13, 20, 123, 77};
+
+    auto DivisibleBy = [](int d)
+    {
+        return [d](int m)
+        { return m % d == 0; };
+    };
+
+    if (ranges::any_of(v, DivisibleBy(7)))
+        std::cout << "At least one number is divisible by 7\n";
+
+    if (std::any_of(v.cbegin(), v.cend(), DivisibleBy(7)))
+        std::cout << "At least one number is divisible by 7\n";
+
+    ranges::for_each(v, [](int &n)
+                     { n *= 2; });
+    ranges::sort(v);
+    std::cout << "Among the numbers: ";
+    ranges::copy(v, std::ostream_iterator<int>(std::cout, " "));
+    std::cout << '\n';
+
+    if (auto result = ranges::find_if(v, [](int x)
+                                      { return x % 13 == 0; });
+        result != v.end())
+        std::cout << "First element divisible by 13 in v: " << *result << '\n';
+    else
+        std::cout << "No elements in v are divisible by 13\n";
+
+    // a view is a non owning range
+    // it's like a window we can set up to view some real data without setting up the infra to store data
+    // views are cheap to copy and pass around as function parameters
+    // auto v_evens = std::views::filter(v, [](int i)
+    //                                   { return (i % 2) == 0; });
+    ranges::filter_view v_evens = ranges::filter_view(v, [](int i)
+                                                      { return (i % 2) == 0; }); // no computation
+    std::cout << "v evens: ";
+    print(v_evens);
+    std::cout << "v odds: ";
+    print(std::views::filter(v, [](int i)
+                             { return (i % 2) != 0; }));
+
+    ranges::take_view v_taken = std::views::take(v, 3); // or ranges::take_view(v, 3)
+    std::cout << "v taken:";
+    print(v_taken);
+
+    ranges::take_while_view v_taken_while = std::views::take_while(v, [](int i)
+                                                                   { return (i % 2) == 0; });
+    std::cout << "v taken while:";
+    print(v_taken_while);
+
+    std::cout << "-----------------"
+              << "\n";
+    // Raw function composition:
+    std::vector<int> vi{1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    auto even = [](int n)
+    { return n % 2 == 0; };
+    auto my_view = std::views::transform(std::views::filter(vi, even), [](auto n)
+                                         { return n *= n; });
+    std::cout << "vi transformed: ";
+    print(my_view);
+
+    // Pipe operator:
+    auto my_view2 = vi | std::views::filter(even) | std::views::transform([](auto n)
+                                                                          { return n *= n; });
+    std::cout << "vi transformed: ";
+    print(my_view2);
+
+    // classroom done as map : Keys are sorted by default
+    // std::unordered_map<std::string,unsigned int> classroom    {
+    std::map<std::string, unsigned int> classroom{
+        {"John", 11},
+        {"Mary", 17},
+        {"Steve", 15},
+        {"Lucy", 14},
+        {"Ariel", 12}};
+
+    // Print out the names
+    // auto names_view = std::views::keys(classroom);
+    auto names_view = classroom | std::views::keys;
+    std::cout << "names : ";
+    std::ranges::copy(names_view, std::ostream_iterator<std::string>(std::cout, " "));
+
+    // Print out the ages :
+    std::cout << std::endl;
+    // auto ages_view = std::views::values(classroom);
+    auto ages_view = classroom | std::views::values;
+    std::cout << "ages : ";
+    std::ranges::copy(ages_view, std::ostream_iterator<unsigned int>(std::cout, " "));
+
+    // Print names in reverse : this doesn't work if you store the data in an
+    // unordered_map. The reason in the unoredered_map doesn't have reverse iterators,
+    // that are needed to set up a reverse view.
+    std::cout << std::endl;
+    std::cout << "names in reverse : ";
+    std::ranges::copy(std::views::keys(classroom) | std::views::reverse,
+                      std::ostream_iterator<std::string>(std::cout, " "));
+
+    // Pick names that come before the letter "M" in the alphabet
+    std::cout << std::endl;
+    auto before_M = [](const std::string &name)
+    {
+        return (static_cast<unsigned char>(name[0]) < static_cast<unsigned char>('M'));
+    };
+
+    std::cout << "names before M : ";
+    std::ranges::copy(classroom | std::views::keys | std::views::filter(before_M),
+                      std::ostream_iterator<std::string>(std::cout, " "));
+
+    // https://en.cppreference.com/w/cpp/algorithm
+    // https://en.cppreference.com/w/cpp/ranges
+
+    // using range constructor
+    for (int i : std::ranges::iota_view{1, 10})
+        std::cout << i << ' ';
+    std::cout << '\n';
+
+    // using range adaptor
+    for (int i : std::views::iota(1, 10))
+        std::cout << i << ' ';
+    std::cout << '\n';
+
+    for (int i : std::views::iota(1) | std::views::take(9))
+        std::cout << i << ' ';
+    std::cout << '\n';
 
     return 0;
 }

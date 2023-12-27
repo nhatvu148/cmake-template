@@ -34,3 +34,12 @@ ReturnType maximum(T a, P b)
 {
     return (a > b) ? a : b; // a and b must support the > operator
 }
+
+void print(auto view)
+{
+    for (auto i : view) // computation happens here
+    {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+}
