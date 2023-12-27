@@ -358,5 +358,10 @@ int main(int argc, char **argv)
         ++cc;
     }
 
+    std::cout << "-----------------"
+              << "\n";
+
+    std::cout << "Maximum: " << maximum(12, 13) << "\n";
+
     return 0;
 }
