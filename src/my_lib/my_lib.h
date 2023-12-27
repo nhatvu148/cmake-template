@@ -20,3 +20,11 @@ T maximum(T a, T b)
 {
     return (a > b) ? a : b; // a and b must support the > operator
 }
+
+// Overload through templates. Will take precedence over raw T if a pointer is passed to maximum
+template <typename T>
+T *maximum(T *a, T *b)
+{
+    std::cout << "Template overload called (T*)" << std::endl;
+    return (*a > *b) ? a : b;
+}

@@ -45,3 +45,10 @@ void say_my_name(std::string_view name)
 {
     std::cout << "Hello your name is : " << name << std::endl;
 }
+
+// a raw overload will take precedence over any template instance if const char * is passed to maximum
+const char *maximum(const char *a, const char *b)
+{
+    std::cout << "Raw overload called" << std::endl;
+    return (std::strcmp(a, b) > 0) ? a : b;
+}

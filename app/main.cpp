@@ -361,7 +361,13 @@ int main(int argc, char **argv)
     std::cout << "-----------------"
               << "\n";
 
-    std::cout << "Maximum: " << maximum(12, 13) << "\n";
+    std::cout << "Maximum1: " << maximum(12.5, 13.5) << "\n";
+    std::cout << "Maximum2: " << maximum<int>(12, 13) << "\n";
+    std::cout << "Maximum3: " << maximum("hello", "world") << "\n";
+
+    int xx{100};
+    int yy{200};
+    std::cout << "Maximum4: " << *maximum(&xx, &yy) << "\n";
 
     return 0;
 }
