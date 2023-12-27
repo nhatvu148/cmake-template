@@ -28,3 +28,9 @@ T *maximum(T *a, T *b)
     std::cout << "Template overload called (T*)" << std::endl;
     return (*a > *b) ? a : b;
 }
+
+template <typename ReturnType, typename T, typename P>
+ReturnType maximum(T a, P b)
+{
+    return (a > b) ? a : b; // a and b must support the > operator
+}

@@ -368,6 +368,7 @@ int main(int argc, char **argv)
     int xx{100};
     int yy{200};
     std::cout << "Maximum4: " << *maximum(&xx, &yy) << "\n";
+    std::cout << "Maximum5: " << maximum<double>(12, 123.345) << "\n";
 
     return 0;
 }
