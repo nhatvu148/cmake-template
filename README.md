@@ -35,3 +35,9 @@
 
 - [cppinsights](https://cppinsights.io)
 - [wandbox](https://wandbox.org)
+
+## References
+
+- [hackingcpp](https://hackingcpp.com)
+- [algorithm](https://en.cppreference.com/w/cpp/algorithm)
+- [ranges](https://en.cppreference.com/w/cpp/ranges)
