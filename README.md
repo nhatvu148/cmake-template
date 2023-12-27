@@ -41,3 +41,5 @@
 - [hackingcpp](https://hackingcpp.com)
 - [algorithm](https://en.cppreference.com/w/cpp/algorithm)
 - [ranges](https://en.cppreference.com/w/cpp/ranges)
+- [awesome-cpp](https://github.com/fffaraz/awesome-cpp)
+- [awesome-modern-cpp](https://github.com/rigtorp/awesome-modern-cpp)
