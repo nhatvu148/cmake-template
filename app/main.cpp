@@ -307,12 +307,56 @@ int main(int argc, char **argv)
     // int some_var{5};
     // result2 = get_value1(some_var);
 
+    std::cout << "-----------------"
+              << "\n";
+
     std::array<int, 6> a{{0, 1, 2, 3, 4, 5}};
     boost::random_shuffle(a);
     boost::copy(a, std::ostream_iterator<int>{std::cout, ","});
     std::cout << "\n"
               << *boost::max_element(a) << '\n';
     std::cout << boost::accumulate(a, 0) << '\n';
+
+    std::cout << "-----------------"
+              << "\n";
+    // Lambda function signature:
+    // [capture list] (parameters) -> return type {
+    // function body
+    // }
+    //
+    // [=] capture everything by value
+    // [&] capture everything by reference
+    auto f = []()
+    {
+        std::cout << "Hello from lambda!!"
+                  << "\n";
+    };
+
+    f();
+
+    double aa{10};
+    double bb{20};
+
+    auto f1 = [aa, bb]()
+    {
+        std::cout << "aa + bb = " << aa + bb
+                  << "\n";
+    };
+
+    f1();
+
+    auto cc{42};
+    auto f2 = [&cc]()
+    {
+        std::cout << "Inner value: " << cc << "\n";
+    };
+
+    for (size_t i{}; i < 5; ++i)
+    {
+        std::cout << "Outer value: " << cc << "\n";
+        f2();
+        ++cc;
+    }
 
     return 0;
 }
