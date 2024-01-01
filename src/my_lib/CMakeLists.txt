@@ -14,8 +14,7 @@ target_link_libraries(
     PRIVATE nlohmann_json::nlohmann_json
             fmt::fmt
             spdlog::spdlog
-            cxxopts::cxxopts
-            boost::boost)
+            cxxopts::cxxopts)
 
 if(ENABLE_WARNINGS)
     target_set_warnings(
