@@ -1,5 +1,6 @@
 VERSION 0.8
 FROM DOCKERFILE .
+WORKDIR /app
 
 deps:
     COPY conanfile.py .
@@ -21,5 +22,5 @@ docker:
     ARG tag='latest'
     FROM +build
     COPY +build/build/app/Executable .
-    ENTRYPOINT ["./Executable"]
+    ENTRYPOINT ["/app/Executable"]
     SAVE IMAGE cmake-test:$tag

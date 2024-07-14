@@ -43,3 +43,9 @@
 - [ranges](https://en.cppreference.com/w/cpp/ranges)
 - [awesome-cpp](https://github.com/fffaraz/awesome-cpp)
 - [awesome-modern-cpp](https://github.com/rigtorp/awesome-modern-cpp)
+
+## Earthly commands
+
+- earthly --allow-privileged +docker
+- docker run --rm cmake-test:latest
+- earthly +docker --tag='my-new-image-tag'
