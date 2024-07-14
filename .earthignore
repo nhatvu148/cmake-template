@@ -1,0 +1,10 @@
+Earthfile
+.gitignore
+.gitmodules
+docker-compose.yml
+Dockerfile
+Makefile
+README.md
+.vscode
+archived
+local-output
