@@ -44,8 +44,14 @@
 - [awesome-cpp](https://github.com/fffaraz/awesome-cpp)
 - [awesome-modern-cpp](https://github.com/rigtorp/awesome-modern-cpp)
 
+## Debug
+
+- Ctrl + Shift + P => Select Cmake Debug
+- Right click on a code line, Open Disassembly View
+
 ## Earthly commands
 
 - earthly --allow-privileged +docker
 - docker run --rm cmake-test:latest
+- podman run --rm cmake-test:latest
 - earthly +docker --tag='my-new-image-tag'
