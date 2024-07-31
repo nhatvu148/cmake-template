@@ -75,3 +75,7 @@ install-vcpkg:
 conan-config:
 	# apt-get install -y vim
 	vim $$(conan profile path default)
+
+earth:
+	earthly --allow-privileged +test
+	# podman run --rm cmake-test:latest
