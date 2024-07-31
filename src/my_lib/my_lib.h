@@ -43,3 +43,11 @@ void print(auto view)
     }
     std::cout << std::endl;
 }
+
+#ifdef _WIN32
+void print_bytes(const void *object, size_t size);
+
+void print_text_to_file(const char *text, const char *filename);
+
+void print_wchar_to_file(const wchar_t *text, const char *filename);
+#endif

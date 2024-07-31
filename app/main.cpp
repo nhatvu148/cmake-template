@@ -498,5 +498,29 @@ int main(int argc, char **argv)
         std::cout << i << ' ';
     std::cout << '\n';
 
+#ifdef _WIN32
+// #if defined(__unix__) || defined(__linux__)
+    std::cout << "-----------------"
+              << "\n";
+
+    std::cout << "\nStoring a Wide Char in Memory";
+    std::cout << "\n------------------------\n\n";
+
+    wchar_t pi = L'π';
+
+    std::cout << "Address is " << static_cast<void *>(&pi) << "\n\n";
+    std::cout << "Size is " << sizeof(pi) << " bytes\n\n";
+    std::wcout << "Value is " << pi << "\n\n";
+
+    std::cout << "\nMemory Blocks : \n";
+    print_bytes(&pi, sizeof(pi));
+
+    const char data123[] = "Hello, World!";
+    print_text_to_file(data123, "output.txt");
+
+    const wchar_t wdata[] = L"Hello, Wide World! π π π";
+    print_wchar_to_file(wdata, "output.txt");
+#endif
+
     return 0;
 }

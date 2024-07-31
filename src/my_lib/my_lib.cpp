@@ -52,3 +52,62 @@ const char *maximum(const char *a, const char *b)
     std::cout << "Raw overload called" << std::endl;
     return (std::strcmp(a, b) > 0) ? a : b;
 }
+
+#ifdef _WIN32
+/* Prints Contents of Memory Blocks */
+void print_bytes(const void *object, size_t size)
+{
+    const unsigned char *const bytes = static_cast<const unsigned char *>(object);
+    size_t i;
+
+    printf("[-");
+    for (i = 0; i < size; i++)
+    {
+        // printf(bytes[i]);
+        int binary[8];
+        for (int n = 0; n < 8; n++)
+        {
+            binary[7 - n] = (bytes[size - 1 - i] >> n) & 1;
+        }
+        /* print result */
+        for (int n = 0; n < 8; n++)
+        {
+            printf("%d", binary[n]);
+        }
+        printf("%c", '-');
+    }
+    printf("]\n\n");
+}
+
+void print_text_to_file(const char *text, const char *filename)
+{
+    // Open the file for writing
+    FILE *file = fopen(filename, "w");
+    if (!file)
+    {
+        perror("Error opening file");
+        return;
+    }
+
+    fprintf(file, "Value is %s\n\n", text);
+
+    // Close the file
+    fclose(file);
+}
+
+void print_wchar_to_file(const wchar_t *text, const char *filename)
+{
+    // Open the file for writing in wide character mode
+    FILE *file = _wfopen(L"output.txt", L"wt");
+    if (!file)
+    {
+        perror("Error opening file");
+        return;
+    }
+
+    fwprintf(file, L"Value is %ls\n\n", text);
+
+    // Close the file
+    fclose(file);
+}
+#endif
