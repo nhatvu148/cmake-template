@@ -499,7 +499,7 @@ int main(int argc, char **argv)
     std::cout << '\n';
 
 #ifdef _WIN32
-// #if defined(__unix__) || defined(__linux__)
+    // #if defined(__unix__) || defined(__linux__)
     std::cout << "-----------------"
               << "\n";
 
@@ -521,6 +521,19 @@ int main(int argc, char **argv)
     const wchar_t wdata[] = L"Hello, Wide World! π π π";
     print_wchar_to_file(wdata, "output.txt");
 #endif
+
+    // char *must be used in conjuction with either a char array, or with a dynamically allocated char array.After all, a pointer is worthless unless it actually points to something.This is mainly used in C programs :
+    char somebuffer[100] = "a string";
+    char *ptr = somebuffer; // ptr now points to somebuffer
+    std::cout << ptr;       // prints "a string"
+    somebuffer[0] = 'b';    // change somebuffer
+    std::cout << ptr;       // prints "b string"
+
+    std::string a = "a string";
+    std::string b = a;
+    std::cout << b; // prints "a string"
+    a[0] = 'b';     // change 'a'
+    std::cout << b; // prints "a string" (not "b string")
 
     return 0;
 }
