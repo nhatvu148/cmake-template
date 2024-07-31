@@ -524,3 +524,8 @@ int main(int argc, char **argv)
 
     return 0;
 }
+
+// Cases where you might prefer char* over std:string
+// 1. When dealing with lower level access like talking to the OS, but usually, if you’re passing the string to the OS then std::string::c_str has it covered.
+// 2. Compatibility with old C code (although std::string’s c_str() method handles most of this).
+// 3. To conserve memory (std::string will likely have more overhead).
