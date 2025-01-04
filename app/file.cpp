@@ -7,6 +7,8 @@ using namespace std;
 
 void read_file();
 void printString(std::string &&str);
+void fun(const int &lref);
+void fun(int &&rref);
 
 // vector, list, stack, queue, dequeue, priority_queue, set, map, unordered_set,
 // unordered_map vector: dynamic array list: doubly linked list stack: LIFO
@@ -367,6 +369,24 @@ int main() {
   // [a = 10]: capture a by value and initialize it to 10
   // [a = x]: capture a by value and initialize it to the value of x
   // [a, b, c]: capture a, b, and c by value
+
+  std::cout << "Size of char : " << sizeof(char) << std::endl;
+  std::cout << "Size of int : " << sizeof(int) << std::endl;
+
+  std::cout << "Size of long : " << sizeof(long) << std::endl;
+  std::cout << "Size of float : " << sizeof(float) << std::endl;
+
+  std::cout << "Size of double : " << sizeof(double) << std::endl;
+
+  wchar_t pi = L'π';
+  // Use wcout for wide characters and set the correct locale for proper display
+  std::wcout.imbue(
+      std::locale("en_US.UTF-8")); // Set locale to one that supports UTF-8
+  std::wcout << L"Value is " << pi << std::endl;
+
+  int x{5};
+  fun(x); // l-value argument calls l-value version of function
+  fun(5); // r-value argument calls r-value version of function
 }
 
 void read_file() {
@@ -389,4 +409,14 @@ void read_file() {
 
 void printString(std::string &&str) { // r-value reference parameter
   std::cout << str << std::endl;
+}
+
+void fun(const int &lref) // l-value arguments will select this function
+{
+  std::cout << "l-value reference to const: " << lref << '\n';
+}
+
+void fun(int &&rref) // r-value arguments will select this function
+{
+  std::cout << "r-value reference: " << rref << '\n';
 }
