@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <bitset>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -11,6 +12,7 @@ void printString(std::string &&str);
 void fun(const int &lref);
 void fun(int &&rref);
 bool isEven(int num);
+void bitwise();
 
 // vector, list, stack, queue, dequeue, priority_queue, set, map, unordered_set,
 // unordered_map vector: dynamic array list: doubly linked list stack: LIFO
@@ -390,19 +392,18 @@ int main() {
   fun(x); // l-value argument calls l-value version of function
   fun(5); // r-value argument calls r-value version of function
 
-  std::cout << (5 << 3) << std::endl; // x << y is equivalent to x * 2^y
+  std::cout << (5 << 3) << std::endl;  // x << y is equivalent to x * 2^y
+  std::cout << (40 >> 3) << std::endl; // x >> y is equivalent to x / 2^y
   std::cout << std::boolalpha << isEven(4) << std::endl;
   std::cout << std::boolalpha << isEven(12345) << std::endl;
   std::cout << ~(16) << std::endl;
 
   int flags = 0; // Start with no flags set
-
   // Set the first and third bits
   flags |= (1 << 0) | (1 << 2);
   std::cout << std::bitset<8>(flags) << std::endl; // "00000101"
 
   int flag = 0; // Start with no flags set
-
   // Toggle the second bit
   flag ^= (1 << 1);
   std::cout << std::bitset<8>(flag) << std::endl; // "00000010"
@@ -419,6 +420,49 @@ int main() {
   // Bitwise AND to Simulate Modulo 2^n
   // 23 % 16 = 7
   std::cout << (23 & (16 - 1)) << std::endl; // 7
+
+  unsigned int rgb = 0xFFAADD; // RGB color in hex
+  unsigned int red = (rgb >> 16) & 0xFF;
+  unsigned int green = (rgb >> 8) & 0xFF;
+  unsigned int blue = rgb & 0xFF;
+  std::cout << "Red: " << red << ", Green: " << green << ", Blue: " << blue
+            << std::endl;
+
+  bitwise();
+
+  return 0;
+}
+
+void bitwise() {
+  int a = 7; //  0111
+  int b = 4; //  0100
+
+  // Bitwise AND
+  int bitwise_and = a & b;
+
+  // Bitwise OR
+  int bitwise_or = a | b;
+
+  // Bitwise XOR
+  int bitwise_xor = a ^ b;
+
+  // Bitwise NOT
+  int bitwise_not = ~b;
+
+  // Bitwise Left Shift
+  int left_shift = 5 << 2;
+
+  // Bitwise Right Shift
+  int right_shift = 16 >> 2;
+
+  // Printing the Results of
+  // Bitwise Operators
+  std::cout << "AND: " << bitwise_and << std::endl;
+  std::cout << "OR: " << bitwise_or << std::endl;
+  std::cout << "XOR: " << bitwise_xor << std::endl;
+  std::cout << "NOT b: " << bitwise_not << std::endl;
+  std::cout << "Left Shift: " << left_shift << std::endl;
+  std::cout << "Right Shift: " << right_shift << std::endl;
 }
 
 bool isEven(int num) { return (num & 1) == 0; }
