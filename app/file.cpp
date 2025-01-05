@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <bitset>
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -9,6 +10,7 @@ void read_file();
 void printString(std::string &&str);
 void fun(const int &lref);
 void fun(int &&rref);
+bool isEven(int num);
 
 // vector, list, stack, queue, dequeue, priority_queue, set, map, unordered_set,
 // unordered_map vector: dynamic array list: doubly linked list stack: LIFO
@@ -387,7 +389,39 @@ int main() {
   int x{5};
   fun(x); // l-value argument calls l-value version of function
   fun(5); // r-value argument calls r-value version of function
+
+  std::cout << (5 << 3) << std::endl; // x << y is equivalent to x * 2^y
+  std::cout << std::boolalpha << isEven(4) << std::endl;
+  std::cout << std::boolalpha << isEven(12345) << std::endl;
+  std::cout << ~(16) << std::endl;
+
+  int flags = 0; // Start with no flags set
+
+  // Set the first and third bits
+  flags |= (1 << 0) | (1 << 2);
+  std::cout << std::bitset<8>(flags) << std::endl; // "00000101"
+
+  int flag = 0; // Start with no flags set
+
+  // Toggle the second bit
+  flag ^= (1 << 1);
+  std::cout << std::bitset<8>(flag) << std::endl; // "00000010"
+  flag ^= (1 << 1);
+  std::cout << std::bitset<8>(flag) << std::endl; // "00000000"
+
+  // Swap two numbers without using a temporary variable
+  int a = 5, b = 10;
+  a ^= b;
+  b ^= a;
+  a ^= b;
+  std::cout << "a: " << a << ", b: " << b << std::endl;
+
+  // Bitwise AND to Simulate Modulo 2^n
+  // 23 % 16 = 7
+  std::cout << (23 & (16 - 1)) << std::endl; // 7
 }
+
+bool isEven(int num) { return (num & 1) == 0; }
 
 void read_file() {
   // Create a text string, which is used to output the text file
